@@ -1,2 +1,10 @@
 to remove spaces we can use strings.split(), but that will return new slice
 s = strings.Replace(s, " ", "", -1) => this is perfect
+------------
+c = 'a' => here datatype is either byte or rune. but in GO default datatype is byte(uint8)
+string itself is slice of rune. so when we access elements of string using s[i], index method, it will give single character of rune and not byte
+printing byte or rune will only return utf8 encoding value
+
+c = '2' => character 2
+x = int(c - '0') => to get int 2, ascii/utf8 value of '0' is 48, and '2' is 50, so 50-48 is 2
+--------------------
