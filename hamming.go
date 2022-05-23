@@ -52,3 +52,4 @@ func Distance(strand1 string, strand2 string) (distance int, e error) {
 byte datatye represents only 127 characters (1byte). so if characters have utf8 encoding indexing will not be proper. Also len() function also returns wrong value.
 Thats why we use rune datatype. it has length of 4bytes. for example chinese letters occupy 4bytes of data(thats what its unicode is). In that case len() will
 return 4 for single character, but we expect 1. utf8.RuneCountInStrings() returns correct length
+*/
