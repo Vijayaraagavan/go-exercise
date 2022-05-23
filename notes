@@ -1,0 +1,2 @@
+to remove spaces we can use strings.split(), but that will return new slice
+s = strings.Replace(s, " ", "", -1) => this is perfect
