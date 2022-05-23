@@ -54,9 +54,14 @@ func Valid(id string) bool {
     }
 	panic("Please implement the Valid function")
 }
-
-
+//--------------------------------
 /*
+if we need to find second digit in every word separated by space, then use strings.Split(s, sep string) []string { to split them, and then range over them
+temp := strings.Split(id, " ")
+*/
+//-----------------------------------
+
+/* PROBLEM
 Strings of length 1 or less are not valid. Spaces are allowed in the input, but they should be stripped before checking. 
 All other non-digit characters are disallowed.
 
