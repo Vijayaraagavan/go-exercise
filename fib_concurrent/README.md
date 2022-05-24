@@ -1,9 +1,8 @@
           Concurrency != Parallelism
 
-Concurrency means that the application has more than one thing to do at the same time. It's about creating multiple processes executing independently.
-
-Let's assume that we have a single-core system, multiple tasks need to be accomplished, but we have a constraint where, at any moment in time, only one task can be executed on the single-core available…
-In a concurrent execution model, there is context switching between the tasks. So the application is dealing with multiple tasks but not executing them together as we have only one executing core.
+Concurrency means that the application has more than one thing to do at the same time. It's about creating multiple processes executing independently.__
+Let's assume that we have a single-core system, multiple tasks need to be accomplished, but we have a constraint where, at any moment in time, only one task can be executed on the single-core available…__
+In a concurrent execution model, there is context switching between the tasks. So the application is dealing with multiple tasks but not executing them together as we have only one executing core.__
 Since there is only one core, we can't achieve parallel execution.
 REMEMBER: At any moment a single physical core can only execute one process at a time. What concurrency does is it takes two problems or process and solve them one at a time but constantly(not constant) switching between them. eg: for 1ms it is running one problem, then for next 0.5ms it is running problem2, then again it swtiches to problem1
 When we run an application, like the browser I am using to write this post, a process is created by the operating system for the application. The job of the process is to act like a container for all the resources the application uses and maintains as it runs. These resources include things like a memory address space, handles to files, devices and threads.
