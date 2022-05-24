@@ -5,11 +5,22 @@ import (
   "sync"
 "runtime"
 )
-var result = make([]int,0)
-var timer = make([]time.Duration, 0)
+var result = make([]int,0)	// declare result and timer as global so that they can be easily accessed in functions
+var timer = make([]time.Duration, 0) //size is 0, because we are going to append dynamically
 
 func Fibrecursive(n int, check int, wg *sync.WaitGroup, in []int, index int, start time.Time) int {
-	// fmt.Println(" here i is ", index)
+	/*
+	n - current input for fibonacci ( it can change dynamically, like 10, 10-1=9, 10-2=8,...)
+	check - const data of input ( this is the first input before recursion starts, 10 which is constant)
+	wg - to control go routines
+	in - input slice (we can get only one input or multiple inputs)
+	index - current index to find the input in input slice
+	start - current time during execution of each go routines
+  so why do we need this much parameters. because we are using go routines it is necessary to watch over them using either channels or waitgroup
+  orelse main program will finish its execution and terminates. channels are useful when we need to send info among go routines. Here waitgroup is enough just
+  to stall the main program
+  	
+	*/
   if n < 2 {
     return n
   }
