@@ -19,7 +19,21 @@ func Fibrecursive(n int, check int, wg *sync.WaitGroup, in []int, index int, sta
   so why do we need this much parameters. because we are using go routines it is necessary to watch over them using either channels or waitgroup
   orelse main program will finish its execution and terminates. channels are useful when we need to send info among go routines. Here waitgroup is enough just
   to stall the main program
-  	
+  	it is just like counter. Add(1) adds 1 count to its counter. to decrement it use Done(). wait() stalls the programs until its counter reaches zero
+	In normal function we can use "defer wg.Done()". but here if you use this then it will be called recursively. 
+so we need to execute this statement only during root func call. suppose input is 50, it is split into 49 and 48 for recursive call. In those sub function
+calls n will not be 50, so if condition will only execute when all recursive calls finished and returns its output to first_node and right_node, then next line executes
+	This is ok for single input, where we can directly give 50 as check
+	but when we give multiple input through slice, we need to give corect input for if condition (i.e check or in[index])
+	Now there is a problem
+	if you just pass iteration index i to go function, you will notice that i is incremented from 0 to 1. if slice length itself is 1, then accessing 
+slice will raise "range out of index" error 
+	This is because when a function is ran as go routine it is detached from main programs flow. It runs independently. so right after you assign i 
+value to index it will start next loop, where it will increment i value then checks for loop condition. Only at that time, go routine starts executing. so 
+index value is now 1 and not 0
+	so i have used -1 as initial value. I am not sure whether it is correct approach
+	Orelse we can use check variable which has current fib input
+
 	*/
   if n < 2 {
     return n
@@ -38,7 +52,7 @@ func Fibrecursive(n int, check int, wg *sync.WaitGroup, in []int, index int, sta
 }
 
 func main() {
-	runtime.GOMAXPROCS(4)
+	runtime.GOMAXPROCS(4)	// it is not recommended to use parallel execution if there is not so many cores in CPU
   var in = []int{10,20, 30, 40,
 	10,20, 30, 40,
 	10,20, 30, 40,
@@ -52,7 +66,7 @@ func main() {
 	10,20, 30, 40,
 }
   var wg sync.WaitGroup
-  var sum_milli int64
+  var sum_milli int64	//check time package. each function returns either float64 or int64 when time converted to numbers
   var sum_min float64
   total_time := time.Now()
 
