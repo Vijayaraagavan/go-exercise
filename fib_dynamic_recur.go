@@ -23,6 +23,8 @@ func Fibdynamic(n int, cache map[int]int) int {
 func main() {
   var in = []int{10,20,30}
   var result []int
+ var sum_milli int64   //see normal recusion for this explanation.
+  var sum_min float64
   var timer []time.Duration   // time.Now() returns current time of type time.Time, whereas time.Since() returns total time from given start time of type 
                                // time.Duration (type is mostly struct with its own field and receiving function)
   
@@ -34,10 +36,15 @@ func main() {
     result = append(result, res)
     timer = append(timer, time.Since(start))
   }
-  
+ for _, i := range timer {         // to add all time.Duration type, use this func(), 
+	  sum_milli += i.Milliseconds()   // refer normal recursion for this explanation
+	  sum_min += i.Minutes()
+  }
   for k, i := range result {
     fmt.Println( in[k], i, timer[k]) 
   } 
+ fmt.Println("It totally took :", sum_milli, "ms", sum_min, "minutes")
+
 }
 
 
