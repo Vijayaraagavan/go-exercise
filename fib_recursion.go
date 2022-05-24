@@ -33,5 +33,9 @@ func main() {
 }
 
 /*
+10 55 1.442µs
+20 6765 47.577µs
+30 832040 5.786663ms
+It will take approx 1m28s to calculate for input 50
 this recursion is inefficient. Most of the time we should use dynamic programming to reduce time
 */
