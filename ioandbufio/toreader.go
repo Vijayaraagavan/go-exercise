@@ -9,6 +9,7 @@ implement this interface. Implementing interface means just defining Read() in t
 eg: func (str string) Read(x []byte) (n int, err error) {
           /...do anything.../
      }
+    ofcourse we need follow few rules while defining Read() func
 With this receiver function we have implemented Reader interface
 Here we pass in a slice of bytes and ask Read() to fill it with its data - which it does until it runs out of data
 It returns no of bytes read or error if something wrong. Additionally, if it has finished reading, it will return a 
@@ -62,3 +63,15 @@ r = Reverse(f)
 
 //Actually, this is an application of interface
             
+-------------------------------------------------------------------------------
+/*
+
+  Data source => io.Reader => (transfer buffer []byte) => io.Writer => Target
+  
+  Data source can be a json (http.Request), any file (.txt, .dat, .csv, ...) => you see, all sources are of different
+  structure in how they store data
+  If it is an io.Reader type, then is Read() function will convert its data to final []byte (slice of bytes)
+  
+  It doesn't matter what the data source is, its final transformation is []bytes
+  These bytes are stored in 
+  
