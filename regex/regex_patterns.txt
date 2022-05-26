@@ -1,0 +1,84 @@
+CHOICE AND GROUPING:
+
+xy	= x followed by y   => "king" here king is a whole word (will not match "ki" but matches "kingfisher")
+-------------------
+
+x|y	= x or y, prefer x  => "ki" | "am" 
+it matches "i am ki"
+"i am king" -> here "king" is matched because regex prefers x over y,
+--------------------
+
+xy|z	= same as (xy)|z  => either "xy" or "z" just like above
+--------------------
+
+xy*  = same as x(y*) 
+-------------------
+
+Repetition (greedy and non-greedy): => when a '?' follows at end it is non-greedy, so it prefers zero or fewer
+
+x*	zero or more x, prefer more
+x*?	prefer fewer (non-greedy)
+x+	one or more x, prefer more
+x+?	prefer fewer (non-greedy)
+x?	zero or one x, prefer one
+x??	prefer zero
+x{n}	exactly n x
+------------------------
+
+Character classes
+
+Expression	Meaning
+.	any character
+[ab]	the character a or b
+[^ab]	any character except a or b
+[a-z]	any character from a to z
+[a-z0-9]	any character from a to z or 0 to 9
+\d	a digit: [0-9]
+\D	a non-digit: [^0-9]
+\s	a whitespace character: [\t\n\f\r ]
+\S	a non-whitespace character: [^\t\n\f\r ]
+\w	a word character: [0-9A-Za-z_]
+\W	a non-word character: [^0-9A-Za-z_]
+\p{Greek}	Unicode character class*
+\pN	one-letter name
+\P{Greek}	negated Unicode character class*
+\PN	one-letter name
+-----------------------------
+
+Special characters
+
+To match a special character \^$.|?*+-[]{}() literally, escape it with a backslash. For example \{ matches an opening brace symbol.
+
+Other escape sequences are:
+
+Symbol	Meaning
+\t	horizontal tab = \011
+\n	newline = \012
+\f	form feed = \014
+\r	carriage return = \015
+\v	vertical tab = \013
+\123	octal character code (up to three digits)
+\x7F	hex character code (exactly two digits)
+---------------------------
+
+Text boundary anchors
+
+Symbol	Matches
+\A	at beginning of text
+^	at beginning of text or line
+$	at end of text
+\z	
+\b	at ASCII word boundary
+\B	not at ASCII word boundary
+---------------------------
+
+Case-insensitive and multiline matches
+
+To change the default matching behavior, you can add a set of flags to the beginning of a regular expression.
+
+For example, the prefix "(?is)" makes the matching case-insensitive and lets . match \n. (The default matching is case-sensitive and . doesn’t match \n.)
+
+Flag	Meaning
+i	case-insensitive
+m	let ^ and $ match begin/end line in addition to begin/end text (multi-line mode)
+s	let . match \n (single-line mode)
