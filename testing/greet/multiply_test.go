@@ -1,3 +1,4 @@
+// table driven test
 package buf
 import "testing"
 
@@ -21,6 +22,15 @@ func TestMultiply(t *testing.T) {
       t.Errorf("Expected '%d', but got '%d'\n", val.want, got) 
   }
 }
-  // "go test"     =>  will run all tests
-  // "go test -v"  => -v flag will print out the names of all the executed test functions and time spent for their execution
+  /*
+   "go test"     =>  will run all tests
+   "go test -v"  => -v flag will print out the names of all the executed test functions and time spent for their execution
   
+  t.Errorf() == first invoke t.Logf(), which logs text to the console either on test failures or when the -v flag is used
+                Then it invokes t.Fail(), which marks the current function as failed without halting its execution
+  t.Fatal() or t.Fatalf() => used to mark the current function as failed, stopping its execution immediatiely
+            == t.Log() or t.Logf() followed by t.FailNow()
+  Disadvantage : it cannot run specific test or testcase
+                 t.Fatal() causes a test case to stop execution, then it does not run other testcases
+
+*/
